@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Virtual Trainer</title>
+    </head>
+    <body>
+		<div style="width: 500px; margin: auto; font-size: 30px;">
+			<fieldset name="Video File Upload and Display">
+				{% if msg %} {% autoescape off %} {{ msg }} {% endautoescape %} {% endif %}
+				<form method="post" action="/" enctype="multipart/form-data">
+					{% csrf_token %}
+					<p>
+						<label>Select a video file</label>&nbsp;&nbsp;
+						<input type="file" name="file" autocomplete="off" required>
+					</p>
+					<label style="padding: 10px;" for="lang">Select exercise </label>
+					<select name="exercises" id="lang" style="font-size: 26px;">
+						<option value="1">Sqaut</option>
+						<option value="2">Bicep</option>
+					</select>
+					<p>
+						<input type="submit" value="Upload and analyze your exercise">
+					</p>
+				</form>
+			</fieldset>
+			
+			{% if filename %}
+				<p></p>
+				<p></p>
+				<label>Correct form and exercise</label>
+				<div style="margin: 10px auto;">
+					<video autoplay="autoplay" controls="controls" width="600" height="700" preload="preload">
+						<source src="{{ MEDIA_URL }}/{{ filename }}" type="video/mp4"></source>
+					</video>
+				</div>
+			{% endif %}
+		</div>	
+    </body>
+</html>
