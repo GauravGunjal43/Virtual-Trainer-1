@@ -34,7 +34,7 @@ def upload_display_video(request):
                                 
                         posList.append(lmString)
                         
-                    cv2.imshow("Image", img)
+                    cv2.imshow(file.name, img)
                     key = cv2.waitKey(1)
                     count = 0
                     first23 = 0
