@@ -77,6 +77,7 @@ def upload_display_video(request):
                                     return render(request, "upload-display-video.html", {'filename': 'video2.mp4'})
             except:
                 cv2.destroyAllWindows()
+                Mbox('Proper form', 'Great! You are doing exercise in correct form.', 0)
             else:
                 print('else')
     else:
