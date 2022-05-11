@@ -40,25 +40,36 @@ def upload_display_video(request):
                     first23 = 0
                     first24 = 0
                     flag= False
-                    if key == ord('s'):
-                        with open("AnimationFile.txt", 'w') as f:
-                            f.writelines(["%s\n" % item for item in posList])
+                    flag1= False
+                    with open("AnimationFile.txt", 'w') as f:
+                        f.writelines(["%s\n" % item for item in posList])
+
                         
-                        # if(form.data['exercises'] == '1'):
-                        #     for _ in posList:
-                        #         count+=1
-                        #         if(count == 1):
-                        #             first23 = _[23][1]
-                        #             first24 = _[24][1]
-                        #             if(first23!=0):
-                        #                 diff=first24-first23
-                        #                 per_cen= diff*0.2
-                                
-                        #         if((_[23][1]-first23)>=per_cen and flag==False):
-                        #             flag=True
-                        #             Mbox('Improper Form Detected', 'Your hip is shifting, please watch correct form.', 0)
-                        #             cv2.destroyAllWindows()
-                        #             return render(request, "upload-display-video.html", {'filename': 'video1.mp4'})
+                        
+                    if(form.data['exercises'] == '1'):
+                        for _ in posList:
+                            count+=1
+                            xcoord_12=_[12][1]
+                            xcoord_14=_[14][1]
+                            xcoord_16=_[16][1]
+                            ycoord_16=_[16][2]
+                            ycoord_14=_[14][2]
+                            per_cen_14=ycoord_14+ycoord_14*0.05
+                            per_cen_12=xcoord_12*0.05
+                            if(ycoord_16>per_cen_14):
+                                Mbox('proper Form Detected', 'round arm action detected, can lead to injury', 0)
+                                cv2.destroyAllWindows()
+                                return render(request, "upload-display-video.html", {'filename': 'video1.mp4'})
+                            elif(xcoord_12-xcoord_14<=per_cen_12 and xcoord_12-xcoord_16<=per_cen_12 and flag1==False):
+                                flag1=True
+                                Mbox('proper Form Detected', 'javelin thrown', 0)
+                                cv2.destroyAllWindows()
+                                return render(request, "upload-display-video.html", {'filename': 'video1.mp4'})
+                            elif(xcoord_16>=xcoord_14-xcoord_14*0.030 and flag==False):
+                                flag=True
+                                Mbox('Improper Form Detected', 'wrist is ahead of elbow too early, please watch correct form.', 0)
+                                cv2.destroyAllWindows()
+                                return render(request, "upload-display-video.html", {'filename': 'video1.mp4'})
 
                         # elif(form.data['exercises'] == '2'):
                         #     for _ in posList:
