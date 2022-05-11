@@ -44,37 +44,37 @@ def upload_display_video(request):
                         with open("AnimationFile.txt", 'w') as f:
                             f.writelines(["%s\n" % item for item in posList])
                         
-                        if(form.data['exercises'] == '1'):
-                            for _ in posList:
-                                count+=1
-                                if(count == 1):
-                                    first23 = _[23][1]
-                                    first24 = _[24][1]
-                                    if(first23!=0):
-                                        diff=first24-first23
-                                        per_cen= diff*0.2
+                        # if(form.data['exercises'] == '1'):
+                        #     for _ in posList:
+                        #         count+=1
+                        #         if(count == 1):
+                        #             first23 = _[23][1]
+                        #             first24 = _[24][1]
+                        #             if(first23!=0):
+                        #                 diff=first24-first23
+                        #                 per_cen= diff*0.2
                                 
-                                if((_[23][1]-first23)>=per_cen and flag==False):
-                                    flag=True
-                                    Mbox('Improper Form Detected', 'Your hip is shifting, please watch correct form.', 0)
-                                    cv2.destroyAllWindows()
-                                    return render(request, "upload-display-video.html", {'filename': 'video1.mp4'})
+                        #         if((_[23][1]-first23)>=per_cen and flag==False):
+                        #             flag=True
+                        #             Mbox('Improper Form Detected', 'Your hip is shifting, please watch correct form.', 0)
+                        #             cv2.destroyAllWindows()
+                        #             return render(request, "upload-display-video.html", {'filename': 'video1.mp4'})
 
-                        elif(form.data['exercises'] == '2'):
-                            for _ in posList:
-                                count+=1
-                                if(count == 1):
-                                    first23 = _[13][1]
+                        # elif(form.data['exercises'] == '2'):
+                        #     for _ in posList:
+                        #         count+=1
+                        #         if(count == 1):
+                        #             first23 = _[13][1]
                                     
-                                    if(first23!=0):
-                                        per_cen= first23*0.085
-                                        print(per_cen)                                  
+                        #             if(first23!=0):
+                        #                 per_cen= first23*0.085
+                        #                 print(per_cen)                                  
                                 
-                                if((first23-_[13][1])>=per_cen and flag==False):
-                                    flag=True
-                                    Mbox('Improper Form Detected', 'Shoulders moving, please watch correct form', 0)
-                                    cv2.destroyAllWindows()
-                                    return render(request, "upload-display-video.html", {'filename': 'video2.mp4'})
+                        #         if((first23-_[13][1])>=per_cen and flag==False):
+                        #             flag=True
+                        #             Mbox('Improper Form Detected', 'Shoulders moving, please watch correct form', 0)
+                        #             cv2.destroyAllWindows()
+                        #             return render(request, "upload-display-video.html", {'filename': 'video2.mp4'})
             except:
                 cv2.destroyAllWindows()
                 Mbox('Proper form', 'Great! You are doing exercise in correct form.', 0)

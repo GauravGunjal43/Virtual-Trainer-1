@@ -3,10 +3,14 @@
     <head>
         <title>Virtual Trainer</title>
     </head>
-    <body>
+    <body style="background-image: url('1.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;">
 		<div style="width: 500px; margin: auto; font-size: 30px; padding-top: 80px; padding-bottom: 80px;">
 			<fieldset name="Video File Upload and Display"
-			style="border-radius: 15px 50px; background-color: lightblue; border-style: solid;text-align:center; border-color: black; border-width: 2px;">
+			style="border-radius: 15px 50px; background-color: lightgray;
+			border-style: solid;text-align:center;
+			border-color: black; border-width: 2px;">
 				{% if msg %} {% autoescape off %} {{ msg }} {% endautoescape %} {% endif %}
 				<form method="post" action="/" enctype="multipart/form-data">
 					{% csrf_token %}
@@ -20,7 +24,7 @@
 						<option value="2">Bicep</option>
 					</select>
 					<p>
-						<input style="padding: 10px 20px; font-size: 18px; border-radius: 15px; background-color: whitesmoke; border-color: black;" 
+						<input style="padding: 10px 20px; font-size: 18px; border-radius: 15px; background-color: whitesmoke; border-color: black; cursor: pointer;" 
 						type="submit" value="Upload and analyze your exercise">
 					</p>
 				</form>
@@ -30,7 +34,7 @@
 				<p></p>
 				<p></p>
 				<p></p>
-				<label style="padding-top: 30px;">Correct form of exercise:</label>
+				<label style="padding-top: 30px; color: white;">Correct form of exercise:</label>
 				<div style="margin: 10px auto;">
 					<video autoplay="autoplay" controls="controls" width="600" height="700" preload="preload" loop muted>
 						<source src="{{ MEDIA_URL }}/{{ filename }}" type="video/mp4"></source>
